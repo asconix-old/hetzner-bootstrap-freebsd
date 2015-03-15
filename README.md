@@ -21,7 +21,7 @@ First of all retrieve your API login credentials from the Hetzner admin interfac
 3. Log into the rescue system and launch the installation
 4. Reboot
 5. Verify installation (very basic check but can be overwritten)
-6. Copy your local ssh public-key into root's .authorized_keys
+6. Copy your local SSH public-key into root's `.authorized_keys`
 7. Adds the generated server key into your `$HOME/.ssh/known_hosts` file
 8. Execute `post_install` hooks (optional)
 
@@ -41,16 +41,7 @@ require "hetzner-bootstrap-freebsd"
 # at https://robot.your-server.de and assign the appropriate environment
 # variables ENV['ROBOT_USER'] and ENV['ROBOT_PASSWORD']
 
-bs = Hetzner::Bootstrap::FreeBSD.new(
-  :api => Hetzner::API.new(ENV['ROBOT_USER'], ENV['ROBOT_PASSWORD'])
-)
-
-# Main configuration (cloud-config)
-cloud_config = <<EOT
-hostname: <%= hostname %>
-ssh_authorized_keys:
-  - <%= public_keys %>
-EOT
+bs = Hetzner::Bootstrap::FreeBSD.new
 
 # The post_install hook is the right place to launch further tasks (e.g.
 # software installation, system provisioning etc.)
@@ -58,11 +49,12 @@ post_install = <<EOT
   # TODO
 EOT
 
-bs << { :ip => "1.2.3.4",
-  :cloud_config => cloud_config,
-  :hostname => 'artemis.massive-insights.com',
-    :public_keys => "~/.ssh/id_rsa.pub",
-    :post_install => post_install
+bs << {
+  :api => Hetzner::API.new(ENV['ROBOT_USER'], ENV['ROBOT_PASSWORD'])
+  :ip => "1.2.3.4",
+  :hostname => 'artemis.asconix.com',
+  :public_keys => "~/.ssh/id_rsa.pub",
+  :post_install => post_install
 }
 
 bs.bootstrap!
