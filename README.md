@@ -41,7 +41,7 @@ require "hetzner-bootstrap-freebsd"
 # at https://robot.your-server.de and assign the appropriate environment
 # variables ENV['ROBOT_USER'] and ENV['ROBOT_PASSWORD']
 
-bs = Hetzner::Bootstrap::FreeBSD.new
+bs = Hetzner::Bootstrap::FreeBSD.new(:api => Hetzner::API.new(ENV['ROBOT_USER'], ENV['ROBOT_PASSWORD']))
 
 # The post_install hook is the right place to launch further tasks (e.g.
 # software installation, system provisioning etc.)
@@ -49,9 +49,7 @@ post_install = <<EOT
   # TODO
 EOT
 
-bs << {
-  :api => Hetzner::API.new(ENV['ROBOT_USER'], ENV['ROBOT_PASSWORD'])
-  :ip => "1.2.3.4",
+bs << {:ip => "1.2.3.4",
   :hostname => 'artemis.asconix.com',
   :public_keys => "~/.ssh/id_rsa.pub",
   :post_install => post_install

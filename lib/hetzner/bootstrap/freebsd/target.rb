@@ -22,7 +22,7 @@ module Hetzner
         attr_accessor :logger
 
         def initialize(options = {})
-          @rescue_os     = 'freebsd'
+          @rescue_os     = 'linux'
           @rescue_os_bit = '64'
           @retries       = 0
           @bootstrap_cmd = ''
