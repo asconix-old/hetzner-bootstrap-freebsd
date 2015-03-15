@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'net-ssh', '~> 2.9.2'
   s.add_dependency 'erubis', '~> 2.7.0'
   s.add_dependency 'colorize', '~> 0.7.5'
+  s.add_dependency 'highline', '~> 1.7.1'
 
   s.add_development_dependency "rspec", "~> 3.2.0"
   s.add_development_dependency "rake"
