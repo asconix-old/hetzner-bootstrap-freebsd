@@ -2,13 +2,12 @@ require 'benchmark'
 require 'logger'
 
 require 'hetzner-api'
-require 'hetzner/bootstrap/coreos/version'
-require 'hetzner/bootstrap/coreos/target'
-require 'hetzner/bootstrap/coreos/cloud_config'
+require 'hetzner/bootstrap/freebsd/version'
+require 'hetzner/bootstrap/freebsd/target'
 
 module Hetzner
   class Bootstrap
-    class CoreOS
+    class FreeBSD
       attr_accessor :targets
       attr_accessor :api
       attr_accessor :actions
@@ -40,10 +39,10 @@ module Hetzner
       end
 
       def add_target(param)
-        if param.is_a? Hetzner::Bootstrap::CoreOS::Target
+        if param.is_a? Hetzner::Bootstrap::FreeBSD::Target
           @targets << param
         else
-          @targets << (Hetzner::Bootstrap::CoreOS::Target.new param)
+          @targets << (Hetzner::Bootstrap::FreeBSD::Target.new param)
         end
       end
 

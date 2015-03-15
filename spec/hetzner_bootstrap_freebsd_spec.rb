@@ -4,7 +4,7 @@ require 'spec_helper'
 describe "Bootstrap" do
   before(:all) do
     @api = Hetzner::API.new API_USERNAME, API_PASSWORD
-    @bootstrap = Hetzner::Bootstrap::CoreOS.new :api => @api
+    @bootstrap = Hetzner::Bootstrap::Hetzner.new :api => @api
   end
 
   context "add target" do
@@ -33,9 +33,8 @@ describe "Bootstrap" do
       :ip            => "1.2.3.4",
       :login         => "root",
       :password      => "verysecret",
-      :rescue_os     => "linux",
-      :rescue_os_bit => "64",
-      :cloud_config  => default_cloud_config
+      :rescue_os     => "freebsd",
+      :rescue_os_bit => "64"
     }
   end
 
