@@ -1,4 +1,4 @@
-# hetzner-bootstrap-coreos
+# hetzner-bootstrap-freebsd
 
 This gem allows to bootstrap FreeBSD on a Hetzner root server.
 
@@ -76,6 +76,18 @@ Warnings:
 ## Thank you greeting
 
 This Ruby gem is inspired by the [hetzner-bootstrap](https://github.com/rmoriz/hetzner-bootstrap) gem and requires the underlying wrapper for the Hetzner server management API [hetzner-api](https://github.com/rmoriz/hetzner-api). Thus I want to thank [Roland Moriz](https://roland.io/developer) a lot for his great work!
+
+## Cheat sheet
+
+Hetzner provides a very powerfull HTTP API. Here are some simple use cases for this API:
+
+*Put a server into rescue mode (here FreeBSD 64-bit)*:
+
+	$~ curl -u $ROBOT_USER:$ROBOT_PASSWORD https://robot-ws.your-server.de/boot/136.243.0.21/rescue -d 'os=freebsd&arch=64'
+
+*Restart the server by hardware reset*:
+
+	$~ curl -u $ROBOT_USER:$ROBOT_PASSWORD https://robot-ws.your-server.de/reset/136.243.0.21 -d 'type=hw'
 
 Copyright
 ---------

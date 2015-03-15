@@ -25,14 +25,7 @@ module Hetzner
             wait_for_ssh_down
             wait_for_ssh_up
             update_local_known_hosts
-            installimage
-            reboot
-            wait_for_ssh_down
-            wait_for_ssh_up
-            update_local_known_hosts
             verify_installation
-            post_install
-            post_install_remote
         )
         @api = options[:api]
         @logger = options[:logger] || Logger.new(STDOUT)

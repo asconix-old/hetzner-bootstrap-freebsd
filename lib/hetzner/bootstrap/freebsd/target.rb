@@ -22,7 +22,7 @@ module Hetzner
         attr_accessor :logger
 
         def initialize(options = {})
-          @rescue_os     = 'linux'
+          @rescue_os     = 'freebsd'
           @rescue_os_bit = '64'
           @retries       = 0
           @bootstrap_cmd = ''
@@ -106,19 +106,6 @@ module Hetzner
           logger.debug "SSH down".colorize(:magenta)
           sleep 2
           retry
-        end
-
-        def installimage(options = {})
-          cloud_config = render_cloud_config
-
-          remote do |ssh|
-            ssh.exec! "echo \"#{cloud_config}\" > /tmp/cloud-config.yaml"
-            ssh.exec! "wget https://raw.githubusercontent.com/coreos/init/master/bin/coreos-install -P /tmp"
-            ssh.exec! "chmod a+x /tmp/coreos-install"
-            logger.info "Remote executing: #{@bootstrap_cmd}".colorize(:magenta)
-            output = ssh.exec!(@bootstrap_cmd)
-            logger.info output
-          end
         end
 
         def reboot(options = {})
