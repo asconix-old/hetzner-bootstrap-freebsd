@@ -8,24 +8,24 @@ describe "Bootstrap" do
   end
 
   context "add target" do
-    
+
     it "should be able to add a server to operate on" do
       @bootstrap.add_target proper_target
       @bootstrap.targets.should have(1).target
-      @bootstrap.targets.first.should be_instance_of Hetzner::Bootstrap::CoreOS::Target
+      @bootstrap.targets.first.should be_instance_of Hetzner::Bootstrap::FreeBSD::Target
     end
 
     it "should have the default cloud config file if none is specified" do
       @bootstrap.add_target proper_target
-      @bootstrap.targets.first.cloud_config.should be_instance_of Hetzner::Bootstrap::CoreOS::CloudConfig
+      @bootstrap.targets.first.cloud_config.should be_instance_of Hetzner::Bootstrap::FreeBSD::CloudConfig
     end
 
     it "should raise an NoCloudConfigProvidedError when no cloud config option provided" do
       lambda {
       @bootstrap.add_target improper_target_without_cloud_condfig
-      }.should raise_error(Hetzner::Bootstrap::CoreOS::Target::NoCloudConfigProvidedError)
+      }.should raise_error(Hetzner::Bootstrap::FreeBSD::Target::NoCloudConfigProvidedError)
     end
-  
+
   end
 
   def proper_target
